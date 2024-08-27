@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ques2</title>
+
+<style>
+    #mydiv
+    {
+        padding:16px ;
+        background-color: lightgray;
+    }
+</style>
+
+<script>
+        
+        function multiplication()
+        {
+            event.preventDefault();
+            let number = document.getElementById("nbr").value;
+            let container = document.getElementById("container");
+
+            
+
+            let table = document.createElement("table");
+            let thead = document.createElement("thead");
+            let trow = document.createElement("tr");
+            let cel1 = document.createElement("th");
+            cel1.textContent = ${number} Multiplier ;
+            let cel2 = document.createElement("th");
+            cel2.textContent = 'Result' ;
+            let tbody = document.createElement("tbody");
+
+
+            for(let i =1; i<=10;i++ )
+            {
+                let row = document.createElement("tr");
+                let c1 = document.createElement("td");
+                let c2 = document.createElement("td");
+                
+                c1.textContent=number + "x" + i;
+                c2.textContent=number*i;
+                row.appendChild(c1);
+
+                row.appendChild(c2);
+                
+                tbody.appendChild(row);
+            }
+
+            table.appendChild(tbody);
+            container.appendChild(table);
+        }
+
+</script>
+    
+</head>
+<body>
+
+<div id="mydiv">
+
+
+    <div class="mainc">
+       
+        <form onsubmit="multiplication()">
+            <label for="nbr">Enter: </label>
+            <input id="nbr" type="number">
+            <button type="submit">Submit</button>
+        </form>
+    
+    <div id="container"></div>
+</body>
+</html>

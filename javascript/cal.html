@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .calculator {
+            width: 300px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: black;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .display {
+            background-color: #eee;
+            padding: 15px;
+            font-size: 24px;
+            text-align: right;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            min-height: 40px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: red;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #ddd;
+        }
+
+        .operator {
+            background-color: #f0f0f0;
+        }
+
+        .equal {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <div class="display" id="display">0</div>
+    <div class="buttons">
+        <button id="ac">AC</button>
+        <button id="percent">%</button>
+        <button id="divide" class="operator">/</button>
+        <button id="multiply" class="operator">*</button>
+        <button id="seven">7</button>
+        <button id="eight">8</button>
+        <button id="nine">9</button>
+        <button id="subtract" class="operator">-</button>
+        <button id="four">4</button>
+        <button id="five">5</button>
+        <button id="six">6</button>
+        <button id="add" class="operator">+</button>
+        <button id="one">1</button>
+        <button id="two">2</button>
+        <button id="three">3</button>
+        <button id="equal" class="equal">=</button>
+        <button id="zero">0</button>
+        <button id="decimal">.</button>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+    let currentInput = '0';
+    let firstOperand = null;
+    let operator = null;
+    let shouldResetDisplay = false;
+
+    function updateDisplay() {
+        display.textContent = currentInput;
+    }
+
+    document.addEventListener('click', function(event) {
+        const target = event.target;
+        if (target.tagName === 'BUTTON') {
+            const buttonValue = target.textContent;
+
+            if (buttonValue === 'AC') {
+                currentInput = '0';
+                firstOperand = null;
+                operator = null;
+                shouldResetDisplay = false;
+            } else if (buttonValue === '%') {
+                currentInput = (parseFloat(currentInput) / 100).toString();
+            } else if (['/', '*', '-', '+'].includes(buttonValue)) {
+                if (firstOperand === null) {
+                    firstOperand = currentInput;
+                    operator = buttonValue;
+                    shouldResetDisplay = true;
+                } else if (operator) {
+                    currentInput = calculate(firstOperand, operator, currentInput);
+                    operator = buttonValue;
+                    firstOperand = currentInput;
+                    shouldResetDisplay = true;
+                }
+            } else if (buttonValue === '=') {
+                if (operator) {
+                    currentInput = calculate(firstOperand, operator, currentInput);
+                    operator = null;
+                    firstOperand = null;
+                }
+            } else if (buttonValue === '.') {
+                if (!currentInput.includes('.')) {
+                    currentInput += '.';
+                }
+            } else {
+                if (currentInput === '0' || shouldResetDisplay) {
+                    currentInput = buttonValue;
+                    shouldResetDisplay = false;
+                } else {
+                    currentInput += buttonValue;
+                }
+            }
+
+            updateDisplay();
+        }
+    });
+
+    function calculate(firstOperand, operator, secondOperand) {
+        const a = parseFloat(firstOperand);
+        const b = parseFloat(secondOperand);
+        switch (operator) {
+            case '/': return (a / b).toString();
+            case '*': return (a * b).toString();
+            case '-': return (a - b).toString();
+            case '+': return (a + b).toString();
+            default: return secondOperand;
+        }
+    }
+
+    updateDisplay();
+</script>
+
+</body>
+</html>

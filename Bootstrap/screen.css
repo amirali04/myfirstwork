@@ -1,0 +1,23 @@
+.navbar-brand
+{
+    font-family: serif;
+}
+
+navbar-nav li a
+{
+    display: flex;
+    justify-items: end;
+}
+.gallery{
+    padding: 0;
+}
+
+.sidenavbar
+{
+    height: 100vh;
+    background-color: #5e5d5d;
+    width: 20%;
+}
+.nae-link{
+    padding: 5px;
+}

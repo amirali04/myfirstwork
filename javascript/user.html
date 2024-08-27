@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Card</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: rgb(179, 172, 159);
+        }
+
+        
+        #box {
+            height: 300px;
+            width: 300px;
+            border: 0px solid black;
+            border-radius: 10px;
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: wheat;
+            box-shadow: 0 4px 8px black;
+        }
+
+        .pic {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+        }
+
+        .det {
+            display: none;
+            text-align: left;
+            margin-top: 20px;
+        }
+       
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: rgb(116, 116, 219);
+        }
+    </style>
+</head>
+<body>
+    
+    <button onclick="showProfile()">Show User</button>
+    
+    <div id="box">
+        <img src="me.jpg" alt="Amir Ali" class="pic">
+        
+        <button onclick="showDetails()">Show Details</button>
+        
+        <div id="det" class="det">
+            <h2>Amir Ali</h2>
+            <p><b>Email:</b> amirali23072@gmail.com</p>
+            <p><b>Location:</b> Jamshoro SUECHS PHASE One</p>
+            <p><b>Website:</b> www.Lifecycle.com</p>
+        </div>
+    </div>
+
+    <script>
+        function showProfile() {
+            document.getElementById('box').style.display = 'block';
+            event.target.style.display = 'none';  
+        }
+
+        function showDetails() {
+            document.getElementById('det').style.display = 'block';
+            event.target.style.display = 'none';  
+        }
+    </script>
+    
+</body>
+</html>

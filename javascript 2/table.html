@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table Generator</title>
+    <style>
+        h1{
+            display: flex;
+            justify-content: center;
+            
+
+        }
+        #frm {
+            padding: 3px;
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        #container {
+            margin: auto;
+            padding: 20px;
+            border: 1px solid black;
+            width: 500px;
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: bisque;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: wheat;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multiplication Table</h1>
+    <form id="frm" onsubmit="generateTable(event)">
+        <label for="nbr">Enter: </label>
+        <input id="nbr" type="number" required>
+        <button type="submit">Generate Table</button>
+    </form>
+    
+    <div id="container"></div>
+
+    <script>
+        function generateTable(event) {
+            event.preventDefault();  
+            let num = parseInt(document.getElementById('nbr').value);
+            let table = '<table><thead><tr><td>Multiplier</td><td>Result</td></tr></thead><tbody>';
+            for (let i = 1; i <= 10; i++) {
+                table += `<tr><td>${num} x ${i}</td><td>${num * i}</td></tr>`;
+            }
+            table += '</tbody></table>';
+            document.getElementById('container').innerHTML = table;
+        }
+    </script>
+</body>
+</html>
